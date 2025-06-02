@@ -65,13 +65,9 @@ Path parameter: /todos/2
 
 ### Eliminar TODO
 - Path : "/todos"
-- Metodo : POST 
+- Metodo : DELETE 
 - Input : 
-```json 
-{
-    "descripcion": "bla bla bla"
-}
-```
+Path parameter: /todos/2
 - Output
 ```json
 { "msg": "" }

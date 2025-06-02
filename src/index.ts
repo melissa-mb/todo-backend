@@ -101,6 +101,28 @@ app.put("/todos/:id", (req : Request, resp : Response)=> {
     })
 })
 
+app.delete("/todos/:id", (req: Request, resp: Response)=>{
+    const todoId = req.params.id
+    const todos = listaTODOs
+
+    let indice = 0
+    for (let t of todos){
+        if (t.id.toString() == todoId){
+            todos.splice(indice, 1) //desde que posicion y cuantos elementos elimina
+            resp.json({
+                msg : ""
+            })
+            break;
+        }
+        indice++;
+    }
+    resp.status(400).json({
+        msg: "No existe todo con ese id"
+    })
+    
+    
+})
+
 app.listen(PORT, () => {
     console.log(`Se inicio servidor en puerto ${PORT}`)
 })

@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }))
 
-
+app.use(express.static("assets"))
 const PORT = process.env.PORT
 
 

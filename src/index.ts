@@ -103,9 +103,31 @@ app.put("/todos/:id", (req : Request, resp : Response)=> {
 
 app.delete("/todos/:id", (req: Request, resp: Response)=>{
     const todoId = req.params.id
-    const todos = listaTODOs
+    let todos = listaTODOs
+    const indiceAEliminar = listaTODOs.findIndex((T: TODO)=>{
+        return T.id.toString() == todoId // almacena la primera posicion q dice true o -1 si no lo encuentra
+    })
+    
+    if (indiceAEliminar == -1){
+        resp.status(400).json({
+            msg: "no existe con ese id"
+        })
+        return
+    }
 
-    let indice = 0
+    todos.splice(indiceAEliminar,1)
+    resp.json({
+        msg: ""
+    })
+    
+    /*
+    const todosFiltrados = listaTODOs.filter((t: TODO, indice: number)=>{
+        return t.id.toString() != todoId
+    }) // retorna los que no son iguales (elimina los q si son iguales)
+
+    listaTODOs = todosFiltrados // no se puede xq es const y no podemos let xq es import asi que */
+
+    /*let indice = 0
     for (let t of todos){
         if (t.id.toString() == todoId){
             todos.splice(indice, 1) //desde que posicion y cuantos elementos elimina
@@ -115,10 +137,10 @@ app.delete("/todos/:id", (req: Request, resp: Response)=>{
             break;
         }
         indice++;
-    }
+    } 
     resp.status(400).json({
         msg: "No existe todo con ese id"
-    })
+    }) */
     
     
 })

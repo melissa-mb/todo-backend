@@ -2,7 +2,7 @@ import express, { Request, Response } from "express"
 import dotenv from "dotenv"
 import { listaTODOs, TODO } from "./data"
 import bodyParser from "body-parser"
-
+import cors from "cors"
 
 dotenv.config()
 const app = express()
@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({
 
 app.use(express.static("assets"))
 const PORT = process.env.PORT
-
+app.use(cors())
 
 app.get("/", (req : Request, resp : Response) => {
     resp.send("Endpoint raiz")
